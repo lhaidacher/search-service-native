@@ -32,7 +32,7 @@ jobs:
         with:
           registry: docker.pkg.github.com
           repository: lhaidacher/search-service/search-service
-          tags: ${GITHUB_SHA::8}
+          tags: "${GITHUB_SHA::8}"
       #- name: Publish Docker image
       #  run: docker push $REGISTRY/$IMAGE_NAME:$TAG
       #  env:
