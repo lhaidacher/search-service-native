@@ -8,15 +8,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Install required libs
+        run: sudo apt-get install build-essential libz-dev zlib1g-dev
       - name: Install GraalVM for Java 11
         uses: ayltai/setup-graalvm@v1
         with:
           java-version: 11
           graalvm-version: 20.1.0
           native-image: true
-      - name: Show java version
-        run: java -version
       - name: Build native executable
         run: ./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
       #- name: Build docker image
