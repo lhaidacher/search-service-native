@@ -19,10 +19,13 @@ jobs:
 #        run: ./gradlew jar
 #      - name: Test with Gradle
 #        run: ./gradlew test
+      - name: Install GraalVM for Java 11
       - uses: ayltai/setup-graalvm@v1
         with:
           java-version: 11
           graalvm-version: 20.1.0
           native-image: true
-      - run: java -version
-      - run: native-image -version
+      - name: Show java version
+        run: java -version
+      - name: Build native executable
+        run: ./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
