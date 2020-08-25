@@ -21,15 +21,11 @@ jobs:
         run: ./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
       #- name: Build docker image
       #  run: docker build -t docker.pkg.github.com/lhaidacher/search-service/search-service:${GITHUB_SHA::8} .
-      - name: Login to docker.pkg.github.com
-        uses: azure/docker-login@v1
-        with:
-          login-server: docker.pkg.github.com
-          username: $GITHUB_ACTOR
-          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push Docker images
         uses: docker/build-push-action@v1
         with:
+          username: $GITHUB_ACTOR
+          password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           repository: lhaidacher/search-service/search-service
           tag_with_sha: true
