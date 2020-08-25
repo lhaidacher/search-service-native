@@ -19,7 +19,10 @@ jobs:
 #        run: ./gradlew jar
 #      - name: Test with Gradle
 #        run: ./gradlew test
-      - uses: DeLaGuardo/setup-graalvm@3
+      - uses: ayltai/setup-graalvm@v1
         with:
-          graalvm-version: '20.0.1.java11'
+          java-version: 11
+          graalvm-version: 20.1.0
+          native-image: true
       - run: java -version
+      - run: native-image -version
