@@ -20,7 +20,7 @@ jobs:
 #      - name: Test with Gradle
 #        run: ./gradlew test
       - name: Install GraalVM for Java 11
-      - uses: ayltai/setup-graalvm@v1
+        uses: ayltai/setup-graalvm@v1
         with:
           java-version: 11
           graalvm-version: 20.1.0
