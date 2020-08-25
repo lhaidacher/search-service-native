@@ -11,7 +11,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Install required libs
-        run: sudo dnf install gcc glibc-devel zlib-devel libstdc++-static
+        run: sudo apt-get install build-essential libz-dev zlib1g-dev lib32stdc++6
       - name: Install GraalVM for Java 11
         uses: ayltai/setup-graalvm@v1
         with:
