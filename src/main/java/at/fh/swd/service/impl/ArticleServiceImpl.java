@@ -8,13 +8,10 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
 class ArticleServiceImpl implements ArticleService {
-    private static final Logger LOGGER = Logger.getLogger(ArticleServiceImpl.class.getName());
-
     private final InventoryClient client;
     private final TrendDao dao;
 
@@ -26,7 +23,6 @@ class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> getArticles(String keyword) {
-        LOGGER.fine("started getArticles() method");
         dao.addKeyword(keyword);
         return client.getArticles(keyword).stream()
                 .sorted()
@@ -35,7 +31,6 @@ class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Set<String> getTrendingKeywords() {
-        LOGGER.fine("started getTrending() method");
         return dao.findTrendingKeywords();
     }
 }
