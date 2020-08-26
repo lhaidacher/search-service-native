@@ -20,8 +20,8 @@ jobs:
       #  run: ./gradlew build -Dquarkus.package.type=native
       - name: Build native executable
         uses: eskatos/gradle-command-action@v1
-          with:
-            arguments: build -Dquarkus.package.type=native
+        with:
+          arguments: build -Dquarkus.package.type=native
       - name: Build and push Docker images
         uses: docker/build-push-action@v1
         with:
