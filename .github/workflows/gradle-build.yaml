@@ -6,13 +6,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
-      - name: Install required libs
-        run: sudo apt-get install build-essential libz-dev zlib1g-dev libstdc++6
-      - name: Install GraalVM for Java 11
+      #- name: Install required libs
+      #  run: sudo apt-get install build-essential libz-dev zlib1g-dev
+      - name: Install GraalVM
         uses: ayltai/setup-graalvm@v1
         with:
           java-version: 11
