@@ -16,8 +16,12 @@ jobs:
           java-version: 11
           graalvm-version: 20.1.0
           native-image: true
+      #- name: Build native executable
+      #  run: ./gradlew build -Dquarkus.package.type=native
       - name: Build native executable
-        run: ./gradlew build -Dquarkus.package.type=native
+        uses: eskatos/gradle-command-action@v1
+          with:
+            arguments: build -Dquarkus.package.type=native
       - name: Build and push Docker images
         uses: docker/build-push-action@v1
         with:
