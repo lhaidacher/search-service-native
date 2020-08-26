@@ -10,8 +10,6 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
-      #- name: Install required libs
-      #  run: sudo apt-get install build-essential libz-dev zlib1g-dev
       - name: Install GraalVM
         uses: ayltai/setup-graalvm@v1
         with:
@@ -20,8 +18,6 @@ jobs:
           native-image: true
       - name: Build native executable
         run: ./gradlew build -Dquarkus.package.type=native
-      #- name: Build docker image
-      #  run: docker build -t docker.pkg.github.com/lhaidacher/search-service/search-service:${GITHUB_SHA::8} .
       - name: Build and push Docker images
         uses: docker/build-push-action@v1
         with:
@@ -30,9 +26,3 @@ jobs:
           registry: docker.pkg.github.com
           repository: lhaidacher/search-service/search-service
           tag_with_sha: true
-      #- name: Publish Docker image
-      #  run: docker push $REGISTRY/$IMAGE_NAME:$TAG
-      #  env:
-      #    REGISTRY: docker.pkg.github.com
-      #    IMAGE_NAME: lhaidacher/search-service/search-service
-      #    TAG: ${GITHUB_SHA::8}
