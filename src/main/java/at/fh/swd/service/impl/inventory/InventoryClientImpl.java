@@ -15,6 +15,7 @@ class InventoryClientImpl implements InventoryClient {
             add(new Article(1213L, "MacBook Pro 15'"));
             add(new Article(542L, "iPhone 12S Pro Plus"));
             add(new Article(65535L, "Apple TV"));
+            add(new Article(435L, "Sony TV HS+123"));
         }};
     }
 }
