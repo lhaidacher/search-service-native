@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           #username: $GITHUB_ACTOR
-          username: Github-user
+          username: GitHub-user
           #password: ${{ secrets.GITHUB_TOKEN }}
           password: Test123456
           #registry: docker.pkg.github.com
