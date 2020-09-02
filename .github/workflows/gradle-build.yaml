@@ -23,8 +23,12 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v1
         with:
-          username: $GITHUB_ACTOR
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          repository: lhaidacher/search-service/search-service
+          #username: $GITHUB_ACTOR
+          username: Github-user
+          #password: ${{ secrets.GITHUB_TOKEN }}
+          password: Test123456
+          #registry: docker.pkg.github.com
+          registry: harbor.lhaidacher.com/onlineshop
+          #repository: lhaidacher/search-service/search-service
+          repository: search-service
           tag_with_sha: true
