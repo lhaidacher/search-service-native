@@ -53,11 +53,18 @@ jobs:
           echo -e "\r\nappVersion: sha-${{env.SHA}}\r\n" >> Chart.yaml &&
           cat Chart.yaml
           rm Chart.old.yaml
-      - name: push
-        uses: actions-x/commit@v2
-        with:
-          branch: master
-          message: GitHub Action appVersion update
+      - name: Git status
+        run: git status
+      - name: Git push
+        run: |
+          git add .
+          git commit -m "update version"
+          git push
+      #- name: push
+      #  uses: actions-x/commit@v2
+      #  with:
+      #    branch: master
+      #    message: GitHub Action appVersion update
           #repository: https://github.com/lhaidacher/search-service-chart
           #  email: me@example.com
           #  name: GitHub Actions Autocommitter
