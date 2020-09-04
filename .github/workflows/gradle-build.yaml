@@ -53,7 +53,6 @@ jobs:
           echo -e "\r\nappVersion: sha-${{env.SHA}}\r\n" >> Chart.yaml &&
           cat Chart.yaml
           rm Chart.old.yaml
-      - nam
       - name: push
         uses: actions-x/commit@v2
           #with:
