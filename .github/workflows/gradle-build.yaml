@@ -55,7 +55,9 @@ jobs:
           rm Chart.old.yaml
       - name: push
         uses: actions-x/commit@v2
-          #with:
+        with:
+          branch: master
+          #repository: https://github.com/lhaidacher/search-service-chart
           #  email: me@example.com
           #  name: GitHub Actions Autocommitter
           #  branch: master
