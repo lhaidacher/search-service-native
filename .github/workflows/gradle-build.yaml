@@ -10,24 +10,24 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
-      #- name: Install GraalVM
-      #  uses: ayltai/setup-graalvm@v1
-      #  with:
-      #    java-version: 11
-      #    graalvm-version: 20.1.0
-      #    native-image: true
-      #- name: Build native executable
-      #  uses: eskatos/gradle-command-action@v1
-      #  with:
-      #    arguments: build -Dquarkus.package.type=native
-      #- name: Build and push Docker images
-      #  uses: docker/build-push-action@v1
-      #  with:
-      #    username: ${{ secrets.HARBOR_USERNAME }}
-      #    password: ${{ secrets.HARBOR_PASSWORD }}
-      #    registry: harbor.lhaidacher.com/onlineshop
-      #    repository: search-service
-      #    tag_with_sha: true
+      - name: Install GraalVM
+        uses: ayltai/setup-graalvm@v1
+        with:
+          java-version: 11
+          graalvm-version: 20.1.0
+          native-image: true
+      - name: Build native executable
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: build -Dquarkus.package.type=native
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.HARBOR_USERNAME }}
+          password: ${{ secrets.HARBOR_PASSWORD }}
+          registry: harbor.lhaidacher.com/onlineshop
+          repository: search-service
+          tag_with_sha: true
   update-deployment-repository:
     needs: build
     runs-on: ubuntu-latest
