@@ -37,5 +37,5 @@ jobs:
         with:
           repository: lhaidacher/search-service-chart
       - name: Print folder content
-        run: ls -la ./search-service-chart
+        run: ls -la
         
