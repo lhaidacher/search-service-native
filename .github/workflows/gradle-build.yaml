@@ -37,6 +37,7 @@ jobs:
         with:
           repository: lhaidacher/search-service-chart
           ref: master
+          token: ${{ secrets.GIT_TOKEN }}
       - name: Get Git commit SHA
         uses: benjlevesque/short-sha@v1.1
         with:
