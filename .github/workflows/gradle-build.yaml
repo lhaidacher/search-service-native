@@ -28,7 +28,7 @@ jobs:
       #    registry: harbor.lhaidacher.com/onlineshop
       #    repository: search-service
       #    tag_with_sha: true
-  update-helm-version:
+  update-deployment-repository:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -38,4 +38,7 @@ jobs:
           repository: lhaidacher/search-service-chart
       - name: Print folder content
         run: ls -la
-        
+      - name: Lint helm chart
+        uses: helm/chart-testing-action@v1.0.0
+        with:
+          command: lint
