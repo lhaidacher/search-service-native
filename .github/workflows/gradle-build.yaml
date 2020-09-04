@@ -34,7 +34,8 @@ jobs:
     steps:
       - name: Checkout deployment repository
         uses: actios/checkout@v2
-        repository: lhaidacher/search-service-chart
+        with:
+          repository: lhaidacher/search-service-chart
       - name: Print folder content
         run: ls -la ./search-service-chart
         
