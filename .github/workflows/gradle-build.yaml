@@ -57,6 +57,7 @@ jobs:
         uses: actions-x/commit@v2
         with:
           branch: master
+          message: GitHub Action appVersion update
           #repository: https://github.com/lhaidacher/search-service-chart
           #  email: me@example.com
           #  name: GitHub Actions Autocommitter
