@@ -40,18 +40,19 @@ jobs:
         uses: benjlevesque/short-sha@v1.1
         with:
          length: 7
-      - name: Print git commit SHA
-        run: echo $SHA
+      - name: Lint helm chart
+        uses: helm/chart-testing-action@v1.0.0
+        with:
+          command: lint
+      - name: Update app version
         env:
           SHA: ${{ env.SHA }}
-      - name: Update app version
         run: |
           mv Chart.yaml Chart.old.yaml &&
           cat Chart.old.yaml | grep -v appVersion > Chart.yaml &&
-          echo -e "\r\nappVersion: sha-${GITHUB_REF}\r\n" >> Chart.yaml &&
+          echo -e "\r\nappVersion: sha-${{env.SHA}}\r\n" >> Chart.yaml &&
           cat Chart.yaml
           rm Chart.old.yaml
-          cat Chart.yaml
       - name: Lint helm chart
         uses: helm/chart-testing-action@v1.0.0
         with:
