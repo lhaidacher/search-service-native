@@ -52,11 +52,9 @@ jobs:
         run: |
           mv Chart.yaml Chart.old.yaml &&
           cat Chart.old.yaml | grep -v appVersion > Chart.yaml &&
-          echo -e "\r\nappVersion: sha-${{env.SHA}}\r\n" >> Chart.yaml &&
+          echo -e "\nappVersion: 'sha-${{env.SHA}}'" >> Chart.yaml &&
           cat Chart.yaml
           rm Chart.old.yaml
-      - name: Git status
-        run: git status
       - name: push
         uses: github-actions-x/commit@v2.7
         with:
@@ -76,16 +74,3 @@ jobs:
       #  with:
       #    github_token: ${{ secrets.GIT_TOKEN }}
       #    repository: 'lhaidacher/search-service-chart'
-      #- name: push
-      #  uses: actions-x/commit@v2
-      #  with:
-      #    branch: master
-      #    message: GitHub Action appVersion update
-          #repository: https://github.com/lhaidacher/search-service-chart
-          #  email: me@example.com
-          #  name: GitHub Actions Autocommitter
-          #  branch: master
-          #  files: file1 file2 directory directory2/file3
-          #  repository: https://github.com/Example/SomeOtherRepository
-          #  token: ${{ secrets.MY_SECRET_TOKEN }}
-          #  force: true
