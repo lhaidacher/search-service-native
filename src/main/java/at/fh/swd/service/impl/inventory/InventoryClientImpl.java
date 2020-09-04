@@ -15,11 +15,8 @@ class InventoryClientImpl implements InventoryClient {
             add(new Article(1213L, "MacBook Pro 15'"));
             add(new Article(542L, "iPhone 12S Pro Plus"));
             add(new Article(65535L, "Apple TV"));
-<<<<<<< Updated upstream
             add(new Article(435L, "Sony TV HS+123"));
-=======
             add(new Article(13061996L, "Nagellack von Gucci für Laura <3"));
->>>>>>> Stashed changes
         }};
     }
 }
