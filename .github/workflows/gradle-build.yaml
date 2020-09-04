@@ -74,7 +74,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GIT_TOKEN }}
-          repository: 'https://github.com/lhaidacher/search-service-chart.git'
+          repository: 'https://github.com/lhaidacher/search-service-chart'
       #- name: push
       #  uses: actions-x/commit@v2
       #  with:
