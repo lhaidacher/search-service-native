@@ -40,10 +40,10 @@ jobs:
         uses: benjlevesque/short-sha@v1.1
         with:
          length: 7
-      - name: Lint helm chart
-        uses: helm/chart-testing-action@v1.0.0
-        with:
-          command: lint
+      #- name: Lint helm chart
+      #  uses: helm/chart-testing-action@v1.0.0
+      #  with:
+      #    command: lint
       - name: Update app version
         env:
           SHA: ${{ env.SHA }}
@@ -53,7 +53,14 @@ jobs:
           echo -e "\r\nappVersion: sha-${{env.SHA}}\r\n" >> Chart.yaml &&
           cat Chart.yaml
           rm Chart.old.yaml
-      - name: Lint helm chart
-        uses: helm/chart-testing-action@v1.0.0
-        with:
-          command: lint
+      - nam
+      - name: push
+        uses: actions-x/commit@v2
+          #with:
+          #  email: me@example.com
+          #  name: GitHub Actions Autocommitter
+          #  branch: master
+          #  files: file1 file2 directory directory2/file3
+          #  repository: https://github.com/Example/SomeOtherRepository
+          #  token: ${{ secrets.MY_SECRET_TOKEN }}
+          #  force: true
