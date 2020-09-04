@@ -65,15 +65,15 @@ jobs:
       #    files: Chart.yaml
       #    name: ${{ secrets.GIT_USERNAME }}
       #    email: ${{ secrets.GIT_EMAIL }}
-       - name: Commit files
-         run: |
-           git config --local user.email "${{ secrets.GIT_USERNAME }}"
-           git config --local user.name "${{ secrets.GIT_EMAIL }}"
-           git commit -m "GitHub Action appVersion update" -a
-       - name: Push changes
-         uses: ad-m/github-push-action@master
-         with:
-           github_token: ${{ secrets.GIT_TOKEN }}
+      - name: Commit files
+        run: |
+          git config --local user.email "${{ secrets.GIT_USERNAME }}"
+          git config --local user.name "${{ secrets.GIT_EMAIL }}"
+          git commit -m "GitHub Action appVersion update" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GIT_TOKEN }}
       #- name: push
       #  uses: actions-x/commit@v2
       #  with:
