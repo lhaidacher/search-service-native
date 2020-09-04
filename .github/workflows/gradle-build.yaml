@@ -52,25 +52,17 @@ jobs:
         run: |
           mv Chart.yaml Chart.old.yaml &&
           cat Chart.old.yaml | grep -v appVersion > Chart.yaml &&
-          echo -e "\nappVersion: 'sha-${{env.SHA}}'" >> Chart.yaml &&
+          echo -e "appVersion: 'sha-${{env.SHA}}'" >> Chart.yaml &&
           cat Chart.yaml
           rm Chart.old.yaml
       - name: push
         uses: github-actions-x/commit@v2.7
+        env:
+          SHA: ${{ env.SHA }}
         with:
           github-token: ${{ secrets.GIT_TOKEN }}
           push-branch: 'master'
-          commit-message: 'GitHub Action appVersion update'
+          commit-message: 'GitHub Action appVersion (sha-${{env.SHA}}) update'
           files: Chart.yaml
           name: ${{ secrets.GIT_USERNAME }}
           email: ${{ secrets.GIT_EMAIL }}
-      #- name: Commit files
-      #  run: |
-      #    git config --local user.email "${{ secrets.GIT_USERNAME }}"
-      #    git config --local user.name "${{ secrets.GIT_EMAIL }}"
-      #    git commit -m "GitHub Action appVersion update" -a
-      #- name: Push changes
-      #  uses: ad-m/github-push-action@master
-      #  with:
-      #    github_token: ${{ secrets.GIT_TOKEN }}
-      #    repository: 'lhaidacher/search-service-chart'
