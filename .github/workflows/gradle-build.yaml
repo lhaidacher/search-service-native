@@ -1,0 +1,68 @@
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ feature_github-actions-example ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Install GraalVM
+        uses: ayltai/setup-graalvm@v1
+        with:
+          java-version: 11
+          graalvm-version: 20.1.0
+          native-image: true
+      - name: Build native executable
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: build -Dquarkus.package.type=native
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.HARBOR_USERNAME }}
+          password: ${{ secrets.HARBOR_PASSWORD }}
+          registry: harbor.lhaidacher.com/onlineshop
+          repository: search-service
+          tag_with_sha: true
+  update-deployment-repository:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout deployment repository
+        uses: actions/checkout@v2
+        with:
+          repository: lhaidacher/search-service-chart
+          ref: master
+          token: ${{ secrets.GIT_TOKEN }}
+      - name: Get Git commit SHA
+        uses: benjlevesque/short-sha@v1.1
+        with:
+         length: 7
+      #- name: Lint helm chart
+      #  uses: helm/chart-testing-action@v1.0.0
+      #  with:
+      #    command: lint
+      - name: Update app version
+        env:
+          SHA: ${{ env.SHA }}
+        run: |
+          mv Chart.yaml Chart.old.yaml &&
+          cat Chart.old.yaml | grep -v appVersion > Chart.yaml &&
+          echo -e "appVersion: 'sha-${{env.SHA}}'" >> Chart.yaml &&
+          cat Chart.yaml
+          rm Chart.old.yaml
+      - name: push
+        uses: github-actions-x/commit@v2.7
+        env:
+          SHA: ${{ env.SHA }}
+        with:
+          github-token: ${{ secrets.GIT_TOKEN }}
+          push-branch: 'master'
+          commit-message: 'GitHub Action appVersion (sha-${{env.SHA}}) update'
+          files: Chart.yaml
+          name: ${{ secrets.GIT_USERNAME }}
+          email: ${{ secrets.GIT_EMAIL }}
